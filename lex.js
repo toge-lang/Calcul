@@ -16,8 +16,11 @@ tokenize(src) {
     column: e
   })};
   while(pos < src.length) {
+    mainSwitch:
     switch(true) {
       case char in alphabet:
+        let next = src[pos+1];
+        if(next === ".") {token(tokens, "TEXT", char); move(); break mainSwitch};
         let val = ``;
         while(src[pos] in alphabet && src[pos] in digits) {val += src[pos]; move()};
         token(tokens, "IDENTIFIER", val);
@@ -48,6 +51,11 @@ tokenize(src) {
           case 'S':
             token(tokens, "L_STACK", '_S');
             break;
+          case '.':
+            token(tokens, "TEXT", '_') ;
+            break;
+          default:
+            throw new Error("can't have _ that isn't nor for a line type, nor for regular text");
         };
     };
   };
