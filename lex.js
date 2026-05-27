@@ -1,7 +1,7 @@
 tokenize(src) {
   const ltrs = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   const dgts = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const pnct ={'<': 'LAB', '>': 'RAB',  '.': 'DELIM', '!': 'EOS'};
+  const pnct ={'<': 'LAB', '>': 'RAB',  '.': 'NORMAL_DELIM', ',': 'FUNC_DELIM','!': 'EOS'};
   const whtspc = [' ', '\n', '\r', '\t'];
   let pos = 0;
   let tkns = [];
@@ -19,8 +19,8 @@ tokenize(src) {
     mainSwitch:
     switch(true) {
       case char in ltrs:
-        let next = src[pos+1];
-        if(next === ".") {tken(tkns, "TEXT", char); move(); break mainSwitch};
+        let nxt = src[pos+1];
+        if(nxt === ".") {tken(tkns, "TEXT", char); move(); break};
         let val = ``;
         while(src[pos] in ltrs && src[pos] in dgts) {val += src[pos]; move()};
         tken(tokens, "IDENTIFIER", val);
@@ -28,7 +28,7 @@ tokenize(src) {
       case char in dgts:
         let val = ``;
         let i = 0;
-        while(src[pos] in digits || src[pos] === '.') {if(src[pos] === '.') {i++}; val += src[pos]; move()};
+        while(src[pos] in digits || src[pos] === '.') {if(src[pos] === '.') {i++}; if(src[pos] === '0' && '.' !in val) {j++}; val += src[pos]; move()};
         if(i > 1) {throw new Error("number found at line " + line + ", column " + col " that contains too many decimal points")};
         tken(tokens, "NUMBER", val);
         break;
@@ -40,7 +40,7 @@ tokenize(src) {
         pos++;
         break;
       case char === '_':
-        next = src[pos+1];
+        nxt = src[pos+1];
         switch(next) {
           case 'O':
             tken(tkns, "L_OUTPUT", '_O');
