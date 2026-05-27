@@ -6,9 +6,9 @@ Welcome to the Calcul manual! This is the full documentation for Calcul, the eso
 ___
 ___
 ## Table of Contents
-0.5. **Hello, World!**
+0.5. (**Hello, World!**)[## Hello, World!]
 ***
-1. **Basics**\
+1. [**Basics**](# Basics)\
 &ensp;1.1. *Functions*\
 &ensp;1.2. *Text Usage*\
 &ensp;1.3. *- O VS - R*\
