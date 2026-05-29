@@ -31,15 +31,25 @@ ___
 ___
 # Basics
   ## Grammar
-  The second thing aside from a hello world program you need to know about Calcul is
+  The second thing aside from a hello world program you need to know about Calcul is the grammar.
+  How about a table for 'em all?
+  | Symbol | Name | Use |
+  | ------ | ---- | --- |
+  | `_O` |  Line Output | Both returns and outputs whatever data and info is on the current line.
+  | `_R` |  Line Return | Just returns whatever data and info is on the current line. Needed for lines like where a variable is declared.
+  | `_S` |  Line Stack  | 'Stacks' lines together up until a certain `_R` or `_O`, returning or outputing the result of all lines stacked plus the final one.
+  | `!`  | End of Statement(EOS) | Used after the final line symbol (`_R`/`_S`/`_O`)of a statement, to mark the end of it.
+  | `.`  | Normal Delimiter | The usual comma equivalent for function arguments.
+  | `,`  | Big Delimiter | If a function needs to be the argument of another function, the preceding `.` turns into a `,`, and if there's two arguments of strings(put letter by letter), they need to be seperated via this.
+  | `<>` | Right/Left Angle Brackets | Both used as comparison operators inside conditions, and outside are just normal paranthesis.
   ## Functions
   Calcul has got lots of functions, each being one letter long.\
   Most are the first letter of what it does, e.g. `s<>` is `subtract()`, but some start with the same letter, so we get creative.\
   Here's the list for all of them:
   | Function | Usage |
   | --- | --- |
-  | `a<x.y>` | Adding x and y togethe
-  | `s<x.y>` | Subtracting numbers 
+  | `a<x.y>` | Adding x and y together
+  | `s<x.y>` | Subtracting y from x
   | `t<x.y>` | multiplying x by y (x Times y)
   | `d<x.y>` | dividing x by y (having result as value) 
   | `r<x.y>` | dividing x by y (having rest as value)
@@ -48,13 +58,16 @@ ___
   | `c<x>` | rounding up x (to it's Ceiling)
   | `z<x>` | rounds x to the nearest integer(inside ℤ)
   | `v<x>` | square root of a number(becausw V‾‾‾ looks similar to the symbol)
-  | `n<x.y.z>` | Creating a new variable x, with type y, and value z
-  | `u<x.y>` | Updating a variable x with the new value y
+  | `n<x,y,z>` | Creating a new variable x, with type y, and value z
+  | `u<x,y>` | Updating a variable x with the new value y
   | `l<x>` | Length of x
-  | `i<x.y.z>` | slIces a part of x, from the yth to the zth character
+  | `i<x,y,z>` | slIces a part of x, from the yth to the zth character
   ___
   ## Text Usage
   Even if calcul is mainly made only as a calculator, it can also use and manipulate text.
   You can use `l<>` and `i<>` for only manipulating text, but there's other stuff too:
   * `a<>` can add text letters together(and variables);
-  * `s<>` can subtract parts of text from a string
+  * `s<>` can subtract parts of text from a string(or variable);
+  * `d<>` to see how many times a part of text is inside a string;
+  * `z<>`, `f<>` and `c<>` all transform any strings into numbers;
+  * 
