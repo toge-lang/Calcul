@@ -13,12 +13,32 @@ function parser(tokens) {
   };
   function parseArgument() {
     switch(peek().type) {
-        case: break;
-        case: break;
-        case: break;
-        case: break;
-        case: break;
-        default:
+      case 'NUMBER':
+        let token = eat("NUMBER");
+        return {
+          type: "Literal",
+          valueType: "Number",
+          value: token
+        };
+        break;
+      case 'TEXT':
+        let token = eat("TEXT");
+        return {
+          type: "Literal",
+          valueType: "Text",
+          value: token
+        };
+        break;
+      case 'VARIABLE':
+        let token = eat("VARIABLE");
+        return {
+          type: "VariableReference",
+          name: token
+        };
+        break;
+      case: break; //TODO: complete all other cases
+      case: break;
+      default:
     };
 };
 module.exports = {parser};
