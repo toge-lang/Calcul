@@ -21,7 +21,7 @@ ___
   | `_R` |  Line Return | Just returns whatever data and info is on the current line. Needed for lines like where a variable is declared.
   | `_S` |  Line Stack  | 'Stacks' lines together up until a certain `_R` or `_O`, returning or outputing the result of all lines stacked plus the final one.
   | `!`  | End of Statement(EOS) | Used after the final line symbol (`_R`/`_S`/`_O`)of a statement, to mark the end of it.
-  | `.`  | Normal Delimiter | The usual comma equivalent for function arguments.
+  | `|`  | Normal Delimiter | The usual comma equivalent for function arguments.
   | `,`  | Big Delimiter | If a function needs to be the argument of another function, the preceding `.` turns into a `,`.
   | `<>` | Right/Left Angle Brackets | Both used as comparison operators inside conditions, and outside are just normal paranthesis.
   ## Functions
