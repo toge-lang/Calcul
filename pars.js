@@ -45,14 +45,8 @@ function parser(tokens) {
           name: token
         };
         break;
-      case 'PARAMETER': let token = eat("PARAMETER");
-        return {
-          type: "ParameterReference",
-          name: token
-        };
-        break; 
       case 'IDENTIFIER': 
-        if(peekAhead().type === 'LPAREN') {return parseFunctionCall()}
+        if(peekAhead().type === 'LAB') {return parseFunctionCall()}
         else {
           let token = eat("IDENTIFIER");
           return {
@@ -65,5 +59,6 @@ function parser(tokens) {
         throw new Error("unrecognized token ' " + peek().value + " ' at line " + peek().line + ", column " + peek().column + ".");
     };
   };
+  parse
 };
 module.exports = {parser};
