@@ -1,22 +1,4 @@
-___
-Welcome to the Calcul manual! This is the full documentation for Calcul, the esolang, ball scrunched up into a huge file.\
-<sub>tip: use the table of contents to get to specific topics easier than just scrolling 10 hours.</sub>
-___
-___
-# Table of Contents
-0.5. [**Hello, World!**](#hello-world)
-***
-1. [**Basics**](#basics)\
-&ensp;1.0.5. [*Grammar*](#grammar)\
-&ensp;1.1. [*Functions*](#functions)\
-&ensp;1.2. [*Text Usage*](#text-usage)\
-&ensp;1.3. *Line Stuff*\
-&ensp;1.4. *Variables*\
-&emsp; 1.4.1. *Creation & Updating*\
-&emsp; 1.4.2. *Data Types*\
-&emsp; 1.4.3. *Methods*\
-&ensp;1.5. *Reevaluation: Chapter 1*\
-___
+Welcome to the Calcul manual! This is the full documentation for Calcul, the esolang, ball scrunched up into a huge file.
 ___
 # Hello, World!
 In Calcul, a Hello World program looks like this:
@@ -31,7 +13,7 @@ ___
 ___
 # Basics
   ## Grammar
-  The second thing aside from a hello world program you need to know about Calcul is the grammar.
+  The second thing aside from a hello world program you need to know about Calcul is the grammar.\
   How about a table for 'em all?
   | Symbol | Name | Use |
   | ------ | ---- | --- |
@@ -40,7 +22,7 @@ ___
   | `_S` |  Line Stack  | 'Stacks' lines together up until a certain `_R` or `_O`, returning or outputing the result of all lines stacked plus the final one.
   | `!`  | End of Statement(EOS) | Used after the final line symbol (`_R`/`_S`/`_O`)of a statement, to mark the end of it.
   | `.`  | Normal Delimiter | The usual comma equivalent for function arguments.
-  | `,`  | Big Delimiter | If a function needs to be the argument of another function, the preceding `.` turns into a `,`, and if there's two arguments of strings(put letter by letter), they need to be seperated via this.
+  | `,`  | Big Delimiter | If a function needs to be the argument of another function, the preceding `.` turns into a `,`.
   | `<>` | Right/Left Angle Brackets | Both used as comparison operators inside conditions, and outside are just normal paranthesis.
   ## Functions
   Calcul has got lots of functions, each being one letter long.\
@@ -50,7 +32,7 @@ ___
   | --- | --- |
   | `a<x.y>` | Adding x and y together
   | `s<x.y>` | Subtracting y from x
-  | `t<x.y>` | multiplying x by y (x Times y)
+  | `x<x.y>` | multiplying x by y (x X y)
   | `d<x.y>` | dividing x by y (having result as value) 
   | `r<x.y>` | dividing x by y (having rest as value)
   | `p<x.y>` | multiplying x by x, y times (the Power of x)
@@ -70,4 +52,4 @@ ___
   * `s<>` can subtract parts of text from a string(or variable);
   * `d<>` to see how many times a part of text is inside a string;
   * `z<>`, `f<>` and `c<>` all transform any strings into numbers;
-  * 
+  * `v<>` to split the entire string into equal parts, new parameter `y` to 
