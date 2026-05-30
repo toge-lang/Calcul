@@ -1,7 +1,7 @@
 tokenize(src) {
-  const ltrs = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  const ltrs = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   const dgts = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const pnct ={'<': 'LAB', '>': 'RAB',  ',': 'NORMAL_DELIM', '|': 'FUNC_DELIM','!': 'EOS'};
+  const pnct ={'<': 'LAB', '>': 'RAB',  ',': 'NORMAL_DELIM', '|': 'FUNC_DELIM', '!': 'EOS'};
   const whtspc = [' ', '\n', '\r', '\t'];
   let pos = 0;
   let tkns = [];
@@ -20,7 +20,7 @@ tokenize(src) {
     switch(true) {
       case char in ltrs:
         let nxt = src[pos+1];
-        if(nxt === ".") {tken(tkns, "TEXT", char); move(); break};
+        if(nxt === "," || bef === ",") {tken(tkns, "TEXT", char); move(); break};
         let val = ``;
         while(src[pos] in ltrs && src[pos] in dgts) {val += src[pos]; move()};
         tken(tokens, "IDENTIFIER", val);
@@ -34,6 +34,7 @@ tokenize(src) {
         break;
       case char in pnct:
         tken(tokens, punctuation[char], char);
+        move();
         break;
       case char in whtspc:
         if(char === '\n') {line++; col = 1};
@@ -41,21 +42,27 @@ tokenize(src) {
         break;
       case char === '_':
         nxt = src[pos+1];
-        switch(next) {
+        bef = src[pos-1];
+        switch(nxt) {
           case 'O':
             tken(tkns, "L_OUTPUT", '_O');
+            move(2);
             break;
           case 'R':
             tken(tkns, "L_RETURN", '_R');
+            move(2);
             break;
           case 'S':
             tken(tkns, "L_STACK", '_S');
+            move(2);
             break;
-          case '.':
-            tken(tkns, "TEXT", '_') ;
+          case ',':
+            tken(tkns, "TEXT", '_');
+            move();
             break;
           default:
-            throw new Error("can't have _ that isn't nor for a line type, nor for regular text");
+            if(bef === ',') {tken(tkns, "TEXT", '_'); move(); break};
+            else {throw new Error("can't have _ that isn't nor for a line type, nor for regular text")};
         };
     };
   };
