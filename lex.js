@@ -1,7 +1,7 @@
 tokenize(src) {
   const ltrs = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   const dgts = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const pnct ={'<': 'LAB', '>': 'RAB',  '.': 'NORMAL_DELIM', ',': 'FUNC_DELIM','!': 'EOS'};
+  const pnct ={'<': 'LAB', '>': 'RAB',  ',': 'NORMAL_DELIM', '|': 'FUNC_DELIM','!': 'EOS'};
   const whtspc = [' ', '\n', '\r', '\t'];
   let pos = 0;
   let tkns = [];
