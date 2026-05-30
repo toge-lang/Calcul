@@ -36,9 +36,24 @@ function parser(tokens) {
           name: token
         };
         break;
-      case: break; //TODO: complete all other cases
-      case: break;
+      case 'PARAMETER':
+        let token = eat("PARAMETER");
+        return {
+          type: "ParameterReference",
+          name: token
+        };
+        break; 
+      case 'IDENTIFIER':
+        if(peekAhead().type === 'LPAREN') {return parseFunctionCall()},
+        else {
+          let token = eat("IDENTIFIER");
+          return {
+            type: "Identifier",
+            name: token
+          };
+        break;
       default:
+        //TODO: complete
     };
 };
 module.exports = {parser};
