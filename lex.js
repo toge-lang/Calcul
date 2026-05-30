@@ -8,34 +8,35 @@ lexer(src) {
   let col = 1;
   let line = 1;
   function move(n = 1) {pos += n; col += n};
-  function tkn(a, b, c, d = line, e = col) {a.push({
-    type: b,
-    value: c,
-    line: d,
-    column: e
+  function tkn(a, b) {tkns.push({
+    type: a,
+    value: b,
+    line: line,
+    column: col
   })};
   while(pos < src.length) {
     const char = src[pos];
     const nxt = src[pos+1];
-    mainSwitch:
     switch(true) {
       case ltrs.includes(char):
         let bef = src[pos-1];
-        if(nxt === "," || bef === ",") {tken(tkns, "TEXT", char); move(); break};
+        if(nxt === "," || bef === ",") {tkn("TEXT", char); move(); break};
         let val = ``;
-        while(src[pos] in ltrs || src[pos] in dgts) {val += src[pos]; move()};
-        tken(tokens, "IDENTIFIER", val);
+        while(ltrs.includes(src[pos]) || dgts.includes(src[pos])) {val += src[pos]; move()};
+        tkn("IDENTIFIER", val);
         break;
       case dgts.includes(char):
         let val = ``;
         let i = 0;
-        while(src[pos] in digits || src[pos] === '.') {if(src[pos] === '.') {i++}; if(src[pos] === '0' && (!('.' in val) && val.split("0").join("") === "")) {j++}; val += src[pos]; move()};
+        while(dgts.includes(src[pos]) || src[pos] === '.') {if(src[pos] === '.') {i++}; if(src[pos] === '0' && (!('.' in val) && val.split("0").join("") === "")) {j++}; val += src[pos]; move()};
         if(i > 1) {throw new Error("number found at line " + line + ", column " + col + " that contains too many decimal points")};
-        if(j > 1) {throw new Error("number found at line " + line + ", columm " + col + " that contains starts with multiple 0's, withot a decimal.")};
-        tken(tokens, "NUMBER", val);
+        if(j > 1) {throw new Error("number found at line " + line + ", columm " + col + " that starts with multiple 0's, without a decimal.")};
+        tkn("NUMBER", val);
         break;
       case char in pnct:
-        tken(tkns, punctuation[char], char);
+        let bef = src[pos-1];
+        if(bef === "," || nxt === ",") {tkn(tkns, "TEXT", char)};
+        tkn(pnct[char], char);
         move();
         break;
       case whtspc.includes(char):
@@ -43,36 +44,39 @@ lexer(src) {
         pos++;
         break;
       case char === '#':
-
+        let val = ``;
+        while(dgts.includes(src[pos]) || ltrs.includes(src[pos]) {val += src[pos]; move};
+        tkn("VARIABLE", val);
+        break;
       case char === '_':
         bef = src[pos-1];
         switch(nxt) {
           case 'O':
-            tken(tkns, "L_OUTPUT", '_O');
+            tkn("L_OUTPUT", '_O');
             move(2);
             break;
           case 'R':
-            tken(tkns, "L_RETURN", '_R');
+            tkn("L_RETURN", '_R');
             move(2);
             break;
           case 'S':
-            tken(tkns, "L_STACK", '_S');
+            tkn("L_STACK", '_S');
             move(2);
             break;
           case ',':
-            tken(tkns, "TEXT", '_');
+            tkn("TEXT", '_');
             move();
             break;
           default:
-            if(bef === ',') {tken(tkns, "TEXT", '_'); move(); break};
+            if(bef === ',') {tkn("TEXT", '_'); move(); break};
             else {throw new Error("can't have _ that isn't nor for a line type, nor for regular text, at line " + line + ", column " + col + ".")};
         };
         break;
       default:
-        throw new Error("unrecognized char, '" + char + "' at line " + line + ", column " + col + ".");
+        throw new Error("unrecognized char, '" + char + "', at line " + line + ", column " + col + ".");
     };
   };
-  token(tkns, "EOF", null);
+  tkn("EOF", null);
   return tkns;
 };  
 module.exports = {lexer};
