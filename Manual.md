@@ -3,11 +3,11 @@ ___
 # Hello, World!
 In Calcul, a Hello World program looks like this:
 ```
-a<h.e.l.l.o.,.w.o.r.l.d.!> _O
+a<H,e,l,l,o, ,W,o,r,l,d,!> _O
 ```
 Going through every part, we return with:
 * `a<>` => add function for Calcul, with  <> being the paranthesis, and A standing for Add.
-* `h.e.l.l.o.,. .w.o.r.l.d.!` => the addition of `h`, `e`, `l`... all together into a single string, `.` acting like a `,`, the argument delimiter.
+* `G,e,l,l,o, ,W,o,r,l,d,!` => the addition of `h`, `e`, `l`... all together into a single string, `.` acting like a `,`, the argument delimiter.
 * `_O` => ends the current line, while also outputing it(O for output). If the line should be treated as normal code, then put `_R`, which just returns any values established. However, you can't put `_R` on all lines. If a piece of code is only a piece of a puzzle, you can put `_S`, S for Stack, to 'stack' code ontop of more code until it reaches a point where the puzzle is finished, where you either `_R` or `_O`.
 ___
 ___
@@ -21,8 +21,8 @@ ___
   | `_R` |  Line Return | Just returns whatever data and info is on the current line. Needed for lines like where a variable is declared.
   | `_S` |  Line Stack  | 'Stacks' lines together up until a certain `_R` or `_O`, returning or outputing the result of all lines stacked plus the final one.
   | `!`  | End of Statement(EOS) | Used after the final line symbol (`_R`/`_S`/`_O`)of a statement, to mark the end of it.
-  | `\|`  | Normal Delimiter | The usual comma equivalent for function arguments.
-  | `,`  | Big Delimiter | If a function needs to be the argument of another function, the preceding `.` turns into a `,`.
+  | `,`  | Normal Delimiter | The usual comma for function argument delimiting.
+  | `\|`  | Big Delimiter | If a function needs to be the argument of another function, the preceding `,` turns into a `\|`.
   | `<>` | Right/Left Angle Brackets | Both used as comparison operators inside conditions, and outside are just normal paranthesis.
   ## Functions
   Calcul has got lots of functions, each being one letter long.\
@@ -30,20 +30,20 @@ ___
   Here's the list for all of them:
   | Function | Usage |
   | --- | --- |
-  | `a<x\|y>` | Adding x and y together
-  | `s<x\|y>` | Subtracting y from x
-  | `x<x\|y>` | multiplying x by y (x X y)
-  | `d<x\|y>` | dividing x by y (having result as value) 
-  | `r<x\|y>` | dividing x by y (having rest as value)
-  | `p<x\|y>` | multiplying x by x, y times (the Power of x)
+  | `a<x,y>` | Adding x and y together
+  | `s<x,y>` | Subtracting y from x
+  | `x<x,y>` | multiplying x by y (x X y)
+  | `d<x,y>` | dividing x by y (having result as value) 
+  | `r<x,y>` | dividing x by y (having rest as value)
+  | `p<x,y>` | multiplying x by x, y times (the Power of x)
   | `f<x>` | rounding down x (to it's Floor)
   | `c<x>` | rounding up x (to it's Ceiling)
   | `z<x>` | rounds x to the nearest integer(inside ℤ)
   | `v<x>` | square root of a number(becausw V‾‾‾ looks similar to the symbol)
-  | `n<x\|y\|z>` | Creating a new variable x, with type y, and value z
-  | `u<x\|y>` | Updating a variable x with the new value y
+  | `n<x,y,z>` | Creating a new variable x, with type y, and value z
+  | `u<x,y>` | Updating a variable x with the new value y
   | `l<x>` | Length of x
-  | `i<x\|y\|z>` | slIces a part of x, from the yth to the zth character
+  | `i<x,y,z>` | slIces a part of x, from the yth to the zth character
   ___
   ## Text Usage
   Even if calcul is mainly made only as a calculator, it can also use and manipulate text.
@@ -52,4 +52,5 @@ ___
   * `s<>` can subtract parts of text from a string(or variable);
   * `d<>` to see how many times a part of text is inside a string;
   * `z<>`, `f<>` and `c<>` all transform any strings into numbers;
-  * `v<>` to split the entire string into equal parts, new parameter `y` only in this use case for how many parts the text is split in.
+  * `v<>` to split the entire string into equal parts, new parameter `y` only in this use case for how many parts the text is split in;
+  ___
